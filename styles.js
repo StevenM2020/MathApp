@@ -45,7 +45,7 @@ export default styles = StyleSheet.create({
       width: 200,
       justifyContent: 'center',
       alignItems: 'center',
-      borderWidth: 5,
+      borderWidth: 3,
       borderColor: 'white',
       borderRadius: 10,
     },
@@ -61,8 +61,8 @@ export default styles = StyleSheet.create({
     viewLimit: {
     height: 40,
     width: 100,
-    overflow: 'hidden',
-    whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis',
-    }
+    flexDirection: 'row',
+    //flex : 1,
+    },
+
   });
