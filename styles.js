@@ -65,8 +65,7 @@ export default styles = StyleSheet.create({
       borderRadius: 2,
     },
     viewLimit: {
-    height: 40,
-    width: 100,
+    height: 50,
     flexDirection: 'row',
     //flex : 1,
     },

@@ -13,7 +13,7 @@ export default function ArithmeticScreen({ navigation }) {
 const [intQ, setIntQ] = useState([]);
 const [intA, setIntA] = useState([]);
 const [intTempA, setTempA] = useState([]);
-const [intUserA, setUserA] = useState([]);
+const [intUserA, setUserA] = useState([0,0,0,0]);
 
 useEffect(() => {
   setIntQ([]);
@@ -33,36 +33,37 @@ useEffect(() => {
   intTempQ2[6] = intTempQ[6] * intTempQ[7];
   console.log(intTempQ2);
   setIntQ(intTempQ2);
-  
-
 },[]);
-
-
-useEffect(() => {
-  const intTempUserA = [...intUserA];
-  intTempUserA[intTempA[1]] = intTempA[0];
-  console.log("temp"+intTempUserA);
-  setUserA(intTempA);
-
-},[intTempA]);
 
 function checkAnswer(){
   let score = 0;
   for(let i = 0; i < intA.length; i++){
-    score += (1 == intA[i] ? 1 : 0);
+    score += (intUserA[i] == intA[i] ? 1 : 0);
   }
   console.log(score);
+  console.log(intA);
   navigation.navigate('Exponite', {score: score});
 }
+
+function setTempAFunction(val, id){
+  //console.log("user " + val + " " + id);
+
+  const intTemp = [...intUserA];
+  intTemp[id] = parseInt(val=="" ? 0 : val);
+  console.log(intTemp);
+  setUserA(intTemp);
+}
+
+
     return (
       <View style={styles.container}>
         <ImageBackground source={chalkBoard} resizeMode="stretch" style={styles.img}>
         <ImageBackground source={border} resizeMode="stretch" style={styles.img}>
         <Text style={styles.titleText}>Arithmetic</Text>
-        <Equation problem={intQ[0] + " + " + intQ[1] + " = "+ intA[0]} setTempA id={0}/>
-        <Equation problem={intQ[2] + " - " + intQ[3] + " = "+ intA[1]} setTempA id={1}/>
-        <Equation problem={intQ[4] + " * " + intQ[5] + " = "+ intA[2]} setTempA id={2}/>
-        <Equation problem={intQ[6] + " / " + intQ[7] + " = "+ intA[3]} setTempA id={3}/>
+        <Equation problem={intQ[0] + " + " + intQ[1] + " = "} onChangeText={(val) => setTempAFunction(val, 0)}/>
+        <Equation problem={intQ[2] + " - " + intQ[3] + " = "} onChangeText={(val) => setTempAFunction(val, 1)}/>
+        <Equation problem={intQ[4] + " * " + intQ[5] + " = "} onChangeText={(val) => setTempAFunction(val, 2)}/>
+        <Equation problem={intQ[6] + " / " + intQ[7] + " = "} onChangeText={(val) => setTempAFunction(val, 3)}/>
         <NextButton onClick={() => checkAnswer()} text = "Next" />
         </ImageBackground>
         </ImageBackground>
