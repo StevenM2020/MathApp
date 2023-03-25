@@ -20,7 +20,7 @@ export default function HomeScreen({ navigation }) {
         <ImageBackground source={border} resizeMode="stretch" style={styles.img}>
         <Text style={styles.titleText}>Math App</Text>
         <Text style={styles.subTitleText}>By Steven Motz</Text>
-        <NextButton onClick={() => navigation.navigate('Arithmetic')} text = "Start" />
+        <NextButton onClick={() => navigation.navigate('Arithmetic')} text = "Arithmetic" />
         </ImageBackground>
       </ImageBackground>
       </View>

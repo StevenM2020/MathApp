@@ -7,10 +7,13 @@ import chalkBoard from '../Images/ChalkBoard.jpg';
 import border from '../Images/woodenBorder.png';
 import styles from '../styles';
 import NextButton from '../NextButton';
+import Equation from '../Equation';
 //fgd
 export default function ArithmeticScreen({ navigation }) {
 const [intQ, setIntQ] = useState([]);
 const [intA, setIntA] = useState([]);
+const [intTempA, setTempA] = useState([]);
+const [intUserA, setUserA] = useState([]);
 
 useEffect(() => {
   setIntQ([]);
@@ -35,44 +38,32 @@ useEffect(() => {
 },[]);
 
 
+useEffect(() => {
+  const intTempUserA = [...intUserA];
+  intTempUserA[intTempA[1]] = intTempA[0];
+  console.log("temp"+intTempUserA);
+  setUserA(intTempA);
+
+},[intTempA]);
+
+function checkAnswer(){
+  let score = 0;
+  for(let i = 0; i < intA.length; i++){
+    score += (1 == intA[i] ? 1 : 0);
+  }
+  console.log(score);
+  navigation.navigate('Exponite', {score: score});
+}
     return (
       <View style={styles.container}>
-          <ImageBackground source={chalkBoard} resizeMode="stretch" style={styles.img}>
-           <ImageBackground source={border} resizeMode="stretch" style={styles.img}>
-        <Text style={styles.titleText}>ArithmeticScreen</Text>
-        
-        <View style={styles.viewLimit}>
-        <Text style={styles.otherText}>{intQ[0] + " + " + intQ[1] + " = " + intA[0]}</Text>
-        <ImageBackground  style={styles.textInputBorder}>
-        <TextInput maxLength={4} id='A4' style={styles.otherText} placeholder="         " />
-        </ImageBackground>
-        </View>
-
-        <View style={styles.viewLimit}>
-        <Text style={styles.otherText}>{intQ[2] + " - " + intQ[3] + " = "+ intA[1]}</Text>
-        <ImageBackground  style={styles.textInputBorder}>
-        <TextInput id='A4' style={styles.otherText} placeholder="         " />
-        </ImageBackground>
-        </View>
-
-        <View style={styles.viewLimit}>
-        <Text style={styles.otherText}>{intQ[4] + " * " + intQ[5] + " = "+ intA[2]}</Text>
-        <ImageBackground  style={styles.textInputBorder}>
-        <TextInput id='A4' style={styles.otherText} placeholder="         " />
-        </ImageBackground>
-        </View>
-
-        <View style={styles.viewLimit}>
-        <Text style={styles.otherText}>{intQ[6] + " / " + intQ[7] + " = "+ intA[3]}</Text>
-        <ImageBackground  style={styles.textInputBorder}>
-        <TextInput id='A4' style={styles.otherText} placeholder="         " />
-        </ImageBackground>
-        </View>
-
-
-        <NextButton onClick={() => navigation.navigate('Arithmetic')} text = "Next" />
-
-
+        <ImageBackground source={chalkBoard} resizeMode="stretch" style={styles.img}>
+        <ImageBackground source={border} resizeMode="stretch" style={styles.img}>
+        <Text style={styles.titleText}>Arithmetic</Text>
+        <Equation problem={intQ[0] + " + " + intQ[1] + " = "+ intA[0]} setTempA id={0}/>
+        <Equation problem={intQ[2] + " - " + intQ[3] + " = "+ intA[1]} setTempA id={1}/>
+        <Equation problem={intQ[4] + " * " + intQ[5] + " = "+ intA[2]} setTempA id={2}/>
+        <Equation problem={intQ[6] + " / " + intQ[7] + " = "+ intA[3]} setTempA id={3}/>
+        <NextButton onClick={() => checkAnswer()} text = "Next" />
         </ImageBackground>
         </ImageBackground>
       </View>
