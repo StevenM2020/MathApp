@@ -9,7 +9,7 @@ import styles from '../styles';
 import NextButton from '../NextButton';
 import Equation from '../Equation';
 //fgd
-export default function ArithmeticScreen({ navigation }) {
+export default function ArithmeticScreen({ navigation,route }) {
 const [intQ, setIntQ] = useState([]);
 const [intA, setIntA] = useState([]);
 const [intTempA, setTempA] = useState([]);
@@ -19,19 +19,21 @@ useEffect(() => {
   setIntQ([]);
   setIntA([]);
   intTempQ = [];
-  for(let i = 0; i < 8; i++){
+  for(let i = 0; i < 4; i++){
     intTempQ.push(Math.floor(Math.random() * 10));
   }
-  intTempQ[7] = (intTempQ[7] = 0 ? 1 : intTempQ[7]);
+  intTempQ.push(Math.floor(Math.random() * 5));
+  intTempQ.push(Math.floor(Math.random() * 5));
 
-  setIntA(prevArray => [...prevArray, intTempQ[0] + intTempQ[1]]);
-  setIntA(prevArray => [...prevArray, intTempQ[2] - intTempQ[3]]);
-  setIntA(prevArray => [...prevArray, intTempQ[4] * intTempQ[5]]);
-  setIntA(prevArray => [...prevArray, intTempQ[6]]);
+  setIntA(prevArray => [...prevArray, intTempQ[0]]);
+  setIntA(prevArray => [...prevArray, intTempQ[1]]);
+  setIntA(prevArray => [...prevArray, Math.pow(intTempQ[2],intTempQ[4])]);
+  setIntA(prevArray => [...prevArray, Math.pow(intTempQ[3],intTempQ[5])]);
 
   const intTempQ2 = [...intTempQ];
-  intTempQ2[6] = intTempQ[6] * intTempQ[7];
-  console.log(intTempQ2);
+  intTempQ2[0] = intTempQ[0]*intTempQ[0];
+  intTempQ2[1] = intTempQ[1]*intTempQ[1];
+  //console.log(intTempQ2);
   setIntQ(intTempQ2);
 },[]);
 
@@ -41,8 +43,10 @@ function checkAnswer(){
     score += (intUserA[i] == intA[i] ? 1 : 0);
   }
   console.log(score);
+  score += route.params.score;
+  console.log(score);
   console.log(intA);
-  navigation.navigate('Exponite', {score: score});
+  navigation.navigate('Results', {score: score});
 }
 
 function setTempAFunction(val, id){
@@ -59,34 +63,14 @@ function setTempAFunction(val, id){
       <View style={styles.container}>
         <ImageBackground source={chalkBoard} resizeMode="stretch" style={styles.img}>
         <ImageBackground source={border} resizeMode="stretch" style={styles.img}>
-        <Text style={styles.titleText}>Arithmetic</Text>
-        <Equation problem={intQ[0] + " + " + intQ[1] + " = "} onChangeText={(val) => setTempAFunction(val, 0)}/>
-        <Equation problem={intQ[2] + " - " + intQ[3] + " = "} onChangeText={(val) => setTempAFunction(val, 1)}/>
-        <Equation problem={intQ[4] + " * " + intQ[5] + " = "} onChangeText={(val) => setTempAFunction(val, 2)}/>
-        <Equation problem={intQ[6] + " / " + intQ[7] + " = "} onChangeText={(val) => setTempAFunction(val, 3)}/>
+        <Text style={styles.titleText}>Exponites</Text>
+        <Equation problem={"The square root of " + intQ[0] + " is "} onChangeText={(val) => setTempAFunction(val, 0)}/>
+        <Equation problem={"The square root of " + intQ[1] + " is "} onChangeText={(val) => setTempAFunction(val, 1)}/>
+        <Equation problem={intQ[2] + " to the power of " + intQ[4] + " is "} onChangeText={(val) => setTempAFunction(val, 2)}/>
+        <Equation problem={intQ[3] + " to the power of " + intQ[5] + " is "} onChangeText={(val) => setTempAFunction(val, 3)}/>
         <NextButton onClick={() => checkAnswer()} text = "Next" />
         </ImageBackground>
         </ImageBackground>
       </View>
     );
   }
-  
-
-  
-
-// },[]);
-//     return (
-//       <View style={styles.container}>
-//         <ImageBackground source={chalkBoard} resizeMode="stretch" style={styles.img}>
-//         <ImageBackground source={border} resizeMode="stretch" style={styles.img}>
-//         <Text style={styles.titleText}>Exponites</Text>
-//         <Equation problem={"The square root of " + "4" + " is "} />
-//         <Equation problem={"The square root of " + "9" + " is "} />
-//         <Equation problem={"3" + " to the power of " + "4" + " is "} />
-//         <Equation problem={"3" + " to the power of " + "4" + " is "} />
-//         <NextButton onClick={() => navigation.navigate('Results')} text = "Next" />
-//         </ImageBackground>
-//         </ImageBackground>
-//       </View>
-//     );
-//   }
