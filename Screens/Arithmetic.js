@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import chalkBoard from '../Images/ChalkBoard.jpg';
 import border from '../Images/woodenBorder.png';
 import styles from '../styles';
+import NextButton from '../NextButton';
 //fgd
 export default function ArithmeticScreen({ navigation }) {
 const [intQ, setIntQ] = useState([]);
@@ -35,7 +36,7 @@ useEffect(() => {
 
 
     return (
-      <View style={styles.containe}>
+      <View style={styles.container}>
           <ImageBackground source={chalkBoard} resizeMode="stretch" style={styles.img}>
            <ImageBackground source={border} resizeMode="stretch" style={styles.img}>
         <Text style={styles.titleText}>ArithmeticScreen</Text>
@@ -69,11 +70,7 @@ useEffect(() => {
         </View>
 
 
-        <TouchableOpacity onPress={() => navigation.navigate('Arithmetic')}>
-        <ImageBackground  style={styles.button1}>
-          <Text style={styles.otherText}>Next</Text>
-        </ImageBackground>
-        </TouchableOpacity>
+        <NextButton onClick={() => navigation.navigate('Arithmetic')} text = "Next" />
 
 
         </ImageBackground>

@@ -3,10 +3,15 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, Image, FlatList, TouchableOpacity, Dimensions } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+//import { useFonts } from 'expo-font';
+
 //sdf
 
 const screenHeight = Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
+
+
+
 
 export default styles = StyleSheet.create({
     container: {
@@ -23,6 +28,7 @@ export default styles = StyleSheet.create({
       fontSize: 45,
       fontWeight: "bold",
       color: 'white',
+  
     },
     otherText: { 
       fontSize: 20,

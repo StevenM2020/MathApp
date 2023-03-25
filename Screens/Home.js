@@ -11,30 +11,18 @@ import chalkBoard from '../Images/ChalkBoard.jpg';
 import border from '../Images/woodenBorder.png';
 import styles from '../styles';
 import fontText from '../styles';
-//import chalkFont from '../assets/fonts/KGTenThousandReasons.ttf';
-//435345
+import NextButton from '../NextButton';
 
 export default function HomeScreen({ navigation }) {
-
     return (
       <View style={styles.container}>
-       
-              <ImageBackground source={chalkBoard} resizeMode="stretch" style={styles.img}>
-                      <ImageBackground source={border} resizeMode="stretch" style={styles.img}>
+        <ImageBackground source={chalkBoard} resizeMode="stretch" style={styles.img}>
+        <ImageBackground source={border} resizeMode="stretch" style={styles.img}>
         <Text style={styles.titleText}>Math App</Text>
         <Text style={styles.subTitleText}>By Steven Motz</Text>
-        <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={() => navigation.navigate('Arithmetic')}>
-        <ImageBackground  style={styles.button1}>
-          <Text style={styles.otherText}>Arithmetic</Text>
-        </ImageBackground>
-        </TouchableOpacity>
-        </View>
+        <NextButton onClick={() => navigation.navigate('Arithmetic')} text = "Start" />
         </ImageBackground>
       </ImageBackground>
-
-
-
       </View>
     );
   }
