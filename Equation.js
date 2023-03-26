@@ -13,6 +13,7 @@ const Equation = ({ problem, onChangeText }) => {
           maxLength={4}
           style={styles.otherText}
           placeholder="         "
+          keyboardType="numeric"
         />
       </ImageBackground>
     </View>
